@@ -1,6 +1,6 @@
 # Birthday [![Build Status](https://secure.travis-ci.org/railslove/birthday.png)](http://travis-ci.org/railslove/birthday)
 
-This is a small gem that hooks into ActiveRecord and allows to tag a database field (date or datetime) as birthday, allowing to find birthdays with ease. 
+This is a small gem that hooks into ActiveRecord and allows to tag a database field (date or datetime) as birthday, allowing to find birthdays with ease.
 
 ## How To Install
 
@@ -119,7 +119,7 @@ If you happen to write one of the adapters, don't hesitate to [make a pull reque
 ## Changelog
 
 * [v0.2.0](https://github.com/railslove/birthday/compare/v0.1.1...v0.2.0)
-  * added `*field*_today` scopes to quickly look up anniversaries for today (acts like `find_*field*s_for(Date.today)`)
+  * added `*field*_today` scopes to quickly look up anniversaries for today (acts like `find_*field*s_for(Time.now.utc.to_date)`)
 
 * [v0.1.1](https://github.com/railslove/birthday/compare/v0.1.0...v0.1.1)
   * fixed autoloading of `Adapter` class in Rails 2 environment

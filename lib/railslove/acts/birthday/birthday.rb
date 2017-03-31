@@ -37,12 +37,12 @@ module Railslove
               where ::Railslove::Acts::Birthday::Adapter.adapter_for(self.connection).scope_hash(field, date_start, date_end)[:conditions]
             })
 
-            self.send(scope_method, :"#{field.to_s}_today", lambda{ self.send(:"find_#{field.to_s.pluralize}_for", Date.today) })
+            self.send(scope_method, :"#{field.to_s}_today", lambda{ self.send(:"find_#{field.to_s.pluralize}_for", Time.now.utc.to_date) })
 
             class_eval %{
               def #{field}_age
                 return nil unless self.#{field}?
-                today = Date.today
+                today = Time.now.utc.to_date
                 age = today.year - #{field}.year
                 age -= 1 if today.month < #{field}.month || (today.month == #{field}.month && today.mday < #{field}.mday)
                 age
@@ -50,7 +50,7 @@ module Railslove
 
               def #{field}_today?
                 return nil unless self.#{field}?
-                Date.today.strftime('%m%d') == #{field}.strftime('%m%d')
+                Time.now.utc.to_date.strftime('%m%d') == #{field}.strftime('%m%d')
               end
             }
           end
